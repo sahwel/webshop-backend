@@ -158,6 +158,8 @@ describe('UserService', () => {
     });
 
     it('should be return error when password not match', async () => {
+      await service.RegisterUser({ ...userStub() });
+
       await expect(
         async () =>
           await service.LoginUser({ ...userStub(), password: 'bad_password' }),
@@ -197,6 +199,18 @@ describe('UserService', () => {
 
     it('should give back id when user is found', async () => {
       await service.RegisterUser(userStub());
+      const response = await service.CreateForgotPassword({
+        email: 'john.doe@test.com',
+      });
+      expect(response.id).not.toBeUndefined();
+      expect(response.msg).toBe('Email sent successfully!');
+    });
+
+    it('should give back id when request already created', async () => {
+      await service.RegisterUser(userStub());
+      await service.CreateForgotPassword({
+        email: 'john.doe@test.com',
+      });
       const response = await service.CreateForgotPassword({
         email: 'john.doe@test.com',
       });

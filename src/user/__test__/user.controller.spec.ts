@@ -65,7 +65,7 @@ describe('AuthController', () => {
       await controller.RegisterUser({
         ...userStub(),
       });
-      const response = await service.LoginUser({ ...userStub() });
+      const response = await controller.LoginUser({ ...userStub() });
       expect(response).toBeDefined();
       expect(response).not.toBeNull();
       expect(loginSpy).toBeCalledWith({ ...userStub() });

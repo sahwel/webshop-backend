@@ -4,7 +4,6 @@ import {
   ArrayMinSize,
   ArrayUnique,
   IsArray,
-  IsDate,
   IsEmail,
   IsEnum,
   IsNotEmpty,

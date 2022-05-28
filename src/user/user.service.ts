@@ -10,7 +10,6 @@ import { Forgot } from './Models/forgot.model';
 import { User } from './Models/user.model';
 import { LoginDTO } from '../commom/definitions/commonDtos';
 import { JwtService } from '@nestjs/jwt';
-import { userJwtFactory } from './user.module';
 
 @Injectable()
 export class UserService implements IUserService {

@@ -1,0 +1,19 @@
+{
+    "moduleFileExtensions": [
+        "ts",
+        "tsx",
+        "js",
+        "json"
+    ],
+    "transform": {
+        "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "/src/.*\\.spec.ts$",
+    "collectCoverageFrom": [
+        "src/**/*.ts",
+        "!**/node_modules/**",
+        "!**/vendor/**",
+        "!src/main.ts",
+        "!src/app.module.ts"
+    ]
+}

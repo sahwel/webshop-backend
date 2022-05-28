@@ -12,7 +12,7 @@ import { adminJwtFactory } from '../admin.module';
 import { AdminService } from '../admin.service';
 import { AdminJwtStrategy } from '../guards/adminJwt.strategy';
 import { AdminSchema } from '../Models/admin.model';
-import { superAdminStub } from './stubs/';
+import { superAdminStub } from './stubs';
 import { config } from 'dotenv';
 import { AdminJwtGuard } from '../guards/adminJwt.guard';
 import { CanEditAdminGuard } from '../guards/canEditAdmins.guard';
@@ -81,7 +81,7 @@ describe('AdminController', () => {
       await controller.RegisterAdmin({
         ...stub,
       });
-      const response = await service.LoginAdmin({ ...stub });
+      const response = await controller.LoginAdmin({ ...stub });
       expect(response).toBeDefined();
       expect(response).not.toBeNull();
       expect(loginSpy).toBeCalledWith({ ...stub });

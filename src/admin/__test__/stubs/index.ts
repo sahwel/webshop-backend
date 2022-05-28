@@ -1,4 +1,4 @@
-import { CreateAdminDTO } from '../../../admin/definitions/AdminDefinitions';
+import { CreateAdminDTO } from '../../definitions/AdminDefinitions';
 import { Roles } from '../../definitions/Roles';
 
 export const superAdminStub = (

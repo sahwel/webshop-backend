@@ -159,6 +159,7 @@ describe('AdminService', () => {
     });
 
     it('should be return error when password not match', async () => {
+      await service.RegisterAdmin({ ...superAdminStub() });
       await expect(
         async () =>
           await service.LoginAdmin({
