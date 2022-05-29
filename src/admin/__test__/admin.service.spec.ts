@@ -14,7 +14,7 @@ import { JwtService } from '@nestjs/jwt';
 import { AdminService } from '../admin.service';
 import { CreateAdminDTO } from '../definitions/AdminDefinitions';
 import { AdminSchema } from '../models/admin.model';
-import { superAdminStub } from './stubs';
+import { SetAdminPAsswordStub, superAdminStub } from './stubs';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { adminJwtFactory } from '../admin.module';
@@ -144,6 +144,14 @@ describe('AdminService', () => {
       expect(errors.length).not.toBe(0);
       expect(stringified(errors)).toContain(`Password too week!`);
     });
+
+    it('should add the readonly role if the roles array is empty', async () => {
+      const response = await service.RegisterAdmin({
+        ...superAdminStub([]),
+        email: 'mezosijoci2@gmail.com',
+      });
+      expect(response).toBeInstanceOf(ObjectId);
+    });
   });
 
   describe('Login admin', () => {
@@ -179,6 +187,84 @@ describe('AdminService', () => {
       const response = await service.LoginAdmin({ ...superAdminStub() });
       expect(response).toBeDefined();
       expect(response).not.toBeNull();
+    });
+  });
+
+  describe('set admin password', () => {
+    it('should return message password changed', async () => {
+      const _id = await service.RegisterAdmin({ ...superAdminStub() });
+      const response = await service.SetPassword(
+        { ...SetAdminPAsswordStub() },
+        { _id, ...superAdminStub() },
+      );
+      expect(response).toEqual({ msg: 'Password changed!' });
+    });
+
+    it('should return error when admin not found', async () => {
+      await expect(
+        async () =>
+          await service.SetPassword(
+            {
+              ...SetAdminPAsswordStub(),
+            },
+            { _id: new ObjectId(), ...superAdminStub() },
+          ),
+      ).rejects.toThrowError(
+        new HttpException(
+          { error: 'Invalid request!' },
+          HttpStatus.BAD_REQUEST,
+        ),
+      );
+    });
+
+    it('should return error when password match with old password', async () => {
+      const _id = await service.RegisterAdmin({ ...superAdminStub() });
+      await service.SetPassword(
+        {
+          ...SetAdminPAsswordStub(),
+        },
+        { _id, ...superAdminStub() },
+      );
+      await expect(
+        async () =>
+          await service.SetPassword(
+            {
+              ...SetAdminPAsswordStub(),
+              password: 'Password1',
+              re_password: 'Password1',
+            },
+            { _id, ...superAdminStub() },
+          ),
+      ).rejects.toThrowError(
+        new HttpException(
+          { error: 'Password cant match with your 5 old password!' },
+          HttpStatus.BAD_REQUEST,
+        ),
+      );
+    });
+
+    it('should return error when logged in user is not match', async () => {
+      await service.RegisterAdmin({ ...superAdminStub() });
+      const _id = await service.RegisterAdmin({
+        ...superAdminStub(),
+        email: 'mezosijoci2@gmail.com',
+      });
+      await expect(
+        async () =>
+          await service.SetPassword(
+            {
+              ...SetAdminPAsswordStub(),
+              password: 'Password1',
+              re_password: 'Password1',
+            },
+            { _id, ...superAdminStub() },
+          ),
+      ).rejects.toThrowError(
+        new HttpException(
+          { error: 'Password cant match with your 5 old password!' },
+          HttpStatus.BAD_REQUEST,
+        ),
+      );
     });
   });
 });
