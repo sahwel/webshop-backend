@@ -1,4 +1,4 @@
-import mongoose, { ObjectId } from 'mongoose';
+import mongoose from 'mongoose';
 import { stringReq } from '../../commom/helpers/Schema.helper';
 import { AdminDTO } from '../definitions/AdminDefinitions';
 
@@ -19,9 +19,8 @@ export const AdminSchema = new mongoose.Schema({
   },
 });
 
-export interface Admin extends mongoose.Document, AdminDTO {}
+export interface Admin extends mongoose.Document, AdminModel {}
 
 export interface AdminModel extends AdminDTO {
-  _id: ObjectId;
   passowrd_modified_at: Date;
 }
