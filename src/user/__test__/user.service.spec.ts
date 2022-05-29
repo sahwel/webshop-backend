@@ -1,6 +1,6 @@
 import { MongooseModule } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserSchema } from '../Models/user.model';
+import { UserSchema } from '../models/user.model';
 import { UserService } from '../user.service';
 import { IUserService } from '../definitions/Interfaces';
 import { forgotStub, userStub } from './stubs/user.stubs';
@@ -10,7 +10,7 @@ import { validate } from 'class-validator';
 import { CreateUserDTO } from '../definitions/UserDefinitions';
 import { plainToInstance } from 'class-transformer';
 import { generateString } from '../../test_utils/generators/string.generators';
-import { ForgotSchema } from '../Models/forgot.model';
+import { ForgotSchema } from '../models/forgot.model';
 import { ForgotDTO, ForgotSetDTO } from '../definitions/ForgotDefinitions';
 import {
   closeMongoConnection,

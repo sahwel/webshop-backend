@@ -23,6 +23,5 @@ export interface Admin extends mongoose.Document, AdminDTO {}
 
 export interface AdminModel extends AdminDTO {
   _id: ObjectId;
-
   passowrd_modified_at: Date;
 }

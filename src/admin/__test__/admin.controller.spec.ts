@@ -11,7 +11,7 @@ import { AdminController } from '../admin.controller';
 import { adminJwtFactory } from '../admin.module';
 import { AdminService } from '../admin.service';
 import { AdminJwtStrategy } from '../guards/adminJwt.strategy';
-import { AdminSchema } from '../Models/admin.model';
+import { AdminSchema } from '../models/admin.model';
 import { superAdminStub } from './stubs';
 import { config } from 'dotenv';
 import { AdminJwtGuard } from '../guards/adminJwt.guard';

@@ -5,7 +5,7 @@ import { compare, hash } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDTO } from '../commom/definitions/commonDtos';
 import { CreateAdminDTO } from './definitions/AdminDefinitions';
-import { Admin } from './Models/admin.model';
+import { Admin } from './models/admin.model';
 
 @Injectable()
 export class AdminService {

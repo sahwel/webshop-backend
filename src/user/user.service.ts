@@ -6,8 +6,8 @@ import { Model } from 'mongoose';
 import { ForgotDTO, ForgotSetDTO } from './definitions/ForgotDefinitions';
 import { IUserService } from './definitions/Interfaces';
 import { CreateUserDTO } from './definitions/UserDefinitions';
-import { Forgot } from './Models/forgot.model';
-import { User } from './Models/user.model';
+import { Forgot } from './models/forgot.model';
+import { User } from './models/user.model';
 import { LoginDTO } from '../commom/definitions/commonDtos';
 import { JwtService } from '@nestjs/jwt';
 
