@@ -5,11 +5,11 @@ import {
   rootMongooseTestModule,
 } from '../../test_utils/mongo/rootMongooseTestModule';
 import { UserController } from '../user.controller';
-import { UserSchema } from '../Models/user.model';
+import { UserSchema } from '../models/user.model';
 import { UserService } from '../user.service';
 import { ObjectId } from 'mongodb';
 import { createForgotStub, forgotStub, userStub } from './stubs/user.stubs';
-import { ForgotSchema } from '../Models/forgot.model';
+import { ForgotSchema } from '../models/forgot.model';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { userJwtFactory } from '../user.module';
 import { PassportModule } from '@nestjs/passport';

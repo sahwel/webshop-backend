@@ -1,6 +1,6 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Roles } from '../definitions/Roles';
-import { Admin } from '../Models/admin.model';
+import { Admin } from '../models/admin.model';
 
 @Injectable()
 export class CanEditAdminGuard implements CanActivate {
