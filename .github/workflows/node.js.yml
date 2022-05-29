@@ -5,11 +5,10 @@ name: CI
 
 on:
   pull_request:
-    branches: [ '*', '*/*', '**'  ]
+    branches: ['*', '*/*', '**']
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     env:
@@ -19,14 +18,13 @@ jobs:
       matrix:
         node-version: [16.x]
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
-    - name: Install dependencies
-      run: yarn
-    - name: Build and run tests
-      run: yarn run build 
-      run: yarn run test
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn
+      - run: yarn run build
+      - run: yarn run test
