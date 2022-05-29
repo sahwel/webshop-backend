@@ -22,7 +22,7 @@ export class AdminService {
           { error: 'Invalid credidentals!' },
           HttpStatus.BAD_REQUEST,
         );
-      //test 2
+
       const validPassword = await compare(data.password, admin.password);
       if (!validPassword)
         throw new HttpException(
