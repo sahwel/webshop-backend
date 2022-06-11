@@ -16,6 +16,7 @@ import { superAdminStub } from './stubs';
 import { config } from 'dotenv';
 import { AdminJwtGuard } from '../guards/adminJwt.guard';
 import { CanEditAdminGuard } from '../guards/canEditAdmins.guard';
+import { ForgotAdminSchema } from '../models/forgotAdmin.model';
 config();
 
 describe('AdminController', () => {
@@ -29,6 +30,9 @@ describe('AdminController', () => {
       imports: [
         rootMongooseTestModule(),
         MongooseModule.forFeature([{ name: 'Admin', schema: AdminSchema }]),
+        MongooseModule.forFeature([
+          { name: 'ForgotAdmin', schema: ForgotAdminSchema },
+        ]),
         JwtModule.registerAsync(adminJwtFactory),
         PassportModule,
       ],

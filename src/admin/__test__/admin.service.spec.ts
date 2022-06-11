@@ -19,6 +19,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { adminJwtFactory } from '../admin.module';
 import { config } from 'dotenv';
+import { ForgotAdminSchema } from '../models/forgotAdmin.model';
 config();
 
 describe('AdminService', () => {
@@ -29,6 +30,9 @@ describe('AdminService', () => {
       imports: [
         rootMongooseTestModule(),
         MongooseModule.forFeature([{ name: 'Admin', schema: AdminSchema }]),
+        MongooseModule.forFeature([
+          { name: 'ForgotAdmin', schema: ForgotAdminSchema },
+        ]),
         JwtModule.registerAsync(adminJwtFactory),
         PassportModule,
       ],

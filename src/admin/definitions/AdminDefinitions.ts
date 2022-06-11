@@ -49,7 +49,7 @@ export class CreateAdminDTO extends AdminDTO {
   re_password: string;
 }
 
-export class SetAdminPasswordDTO {
+export class PasswordDTO {
   @IsString()
   @MinLength(8)
   @MaxLength(512)
@@ -59,9 +59,17 @@ export class SetAdminPasswordDTO {
   password: string;
   @Match('password')
   re_password: string;
+}
 
+export class SetAdminPasswordDTO extends PasswordDTO {
   @IsEmail()
   @MaxLength(512)
   @IsNotEmpty()
   email: string;
+}
+
+export class SetForgotAdminPasswordDTO extends PasswordDTO {
+  @IsString()
+  @IsNotEmpty()
+  id: string;
 }
