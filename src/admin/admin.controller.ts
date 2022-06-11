@@ -1,8 +1,12 @@
-import { Controller, UseGuards } from '@nestjs/common';
+import { Controller, Req, UseGuards } from '@nestjs/common';
 import { Body, Post } from '@nestjs/common';
 import { LoginDTO } from '../commom/definitions/commonDtos';
 import { AdminService } from './admin.service';
-import { CreateAdminDTO } from './definitions/AdminDefinitions';
+import {
+  CreateAdminDTO,
+  SetAdminPasswordDTO,
+  SetForgotAdminPasswordDTO,
+} from './definitions/AdminDefinitions';
 import { AdminJwtGuard } from './guards/adminJwt.guard';
 import { CanEditAdminGuard } from './guards/canEditAdmins.guard';
 
@@ -19,5 +23,14 @@ export class AdminController {
   @Post('login')
   async LoginAdmin(@Body() data: LoginDTO) {
     return await this.adminService.LoginAdmin(data);
+  }
+  @Post('setPassword')
+  async SetPassword(@Body() data: SetAdminPasswordDTO, @Req() request) {
+    return await this.adminService.SetPassword(data, request.user);
+  }
+
+  @Post('login')
+  async SetForgotPassword(@Body() data: SetForgotAdminPasswordDTO) {
+    return await this.adminService.SetForgotPassword(data);
   }
 }

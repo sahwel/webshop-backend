@@ -6,6 +6,7 @@ import { AdminSchema } from './models/admin.model';
 import { JwtModule } from '@nestjs/jwt';
 import { AdminJwtStrategy } from './guards/adminJwt.strategy';
 import { PassportModule } from '@nestjs/passport';
+import { ForgotAdminSchema } from './models/forgotAdmin.model';
 
 export const adminJwtFactory = {
   useFactory: async () => ({
@@ -18,6 +19,9 @@ export const adminJwtFactory = {
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'Admin', schema: AdminSchema }]),
+    MongooseModule.forFeature([
+      { name: 'ForgotAdmin', schema: ForgotAdminSchema },
+    ]),
     JwtModule.registerAsync(adminJwtFactory),
     PassportModule,
   ],
